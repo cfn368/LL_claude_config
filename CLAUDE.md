@@ -32,11 +32,19 @@ Work-stream labels — use as-is, don't re-expand: `ETT` (think tank), `UKR` (Un
 
 ## Notebook conventions
 
-Three-notebook pattern for simulation/research tools: `1_create → 2_run → 3_optimise` (or `_analyse`). Executed notebook output is the primary interface for non-Python-fluent readers — treat it as documentation.
-
 Storage defaults: Parquet for run output; CSV/Excel for stakeholder deliverables. Separate `input_variables.py` / `output_variables.py` as the human-readable ↔ internal-name bridge.
 
+Cell structure, markdown conventions, LaTeX in notebooks → see `skills/notebook-style/`.
+
 Plotting: **matplotlib only**. Strict style standards → see `skills/econ-plotting/`.
+
+## Writing
+
+Analysis prose (English academic): first person present, topic → development → implication, intuition before formalism, calibrated empirical language. Em-dash and colon used sparingly.
+
+Policy/think-tank output (Danish, ETT): "vi" not "jeg", shorter sentences, explicit plain-language caveats, blunt policy conclusion at the end.
+
+Register, typography, and Danish conventions → see `skills/writing-style/`.
 
 ## Suppressions
 
