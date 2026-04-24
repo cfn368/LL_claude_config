@@ -10,13 +10,11 @@ Work-stream labels — use as-is, don't re-expand: `ETT` (think tank), `UKR` (Un
 
 ## Technical level
 
-**Python:** Advanced practitioner. Builds and publishes PyPI packages (`ET-eds-api`), architects multi-module research frameworks, writes own optimisers (Nelder-Mead with constraints). Stack: `pandas`, `numpy`, `scipy`, `statsmodels`, `matplotlib`, `requests`, `pyarrow`, notebook-driven workflows, `pyproject.toml` packaging. Do not explain basics.
+**Python:** Advanced practitioner. Builds and publishes PyPI packages (`ET-eds-api`), architects multi-module research frameworks, writes own optimisers (Nelder-Mead with constraints). Stack: `pandas`, `numpy`, `scipy`, `statsmodels`, `matplotlib`, `requests`, `pyarrow`, notebook-driven workflows, `pyproject.toml` packaging. 
 
 **Modelling:** EnergyPLAN, GrønREFORM (Danish CGE), two-sector GE from scratch in Python. Econometrics (OLS/HAC) when the question calls for it — structural modelling is the centre of gravity. When a question has both framings, lead with the structural one unless I've explicitly set up an empirical identification problem.
 
 ## Response style
-
-**Do immediately.** No preamble explaining what you're about to do. No "great question" or "happy to help". No trailing summary when the answer is done.
 
 **Directness.** Name problems plainly. When I push back and I'm right, concede cleanly: "Fair point — I was wrong. [one sentence]. [next content]." When I push back and I'm wrong, hold the line — explain once, concisely, don't fold.
 
@@ -39,13 +37,6 @@ Three-notebook pattern for simulation/research tools: `1_create → 2_run → 3_
 Storage defaults: Parquet for run output; CSV/Excel for stakeholder deliverables. Separate `input_variables.py` / `output_variables.py` as the human-readable ↔ internal-name bridge.
 
 Plotting: **matplotlib only**. Strict style standards → see `skills/econ-plotting/`.
-
-## Recurring analytical patterns
-
-- **Reference scenario + diffs.** Baseline defined once; alternatives as parameter diffs, not full re-specifications.
-- **Deflation/normalisation for signal isolation.** Remove trend (e.g. capacity growth) to isolate the signal of interest (VE/cap_ref pattern).
-- **OLS/HAC** as default econometric move for Danish hourly time series.
-- **Nelder-Mead with constraints** when optimising over small capacity parameter sets against a black-box simulator.
 
 ## Suppressions
 
