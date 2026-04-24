@@ -76,15 +76,32 @@ solar_ve_1gw = VE(..., cap_ref=1_000)
 - `None` — denominator is last observed capacity
 - `float` (MW) — counterfactual fixed capacity; use for reference scenario + diffs
 
-## EnergyPLAN variation pattern files
+## Raw fetch — data not covered by ET-eds-api
 
-`save_txt=True` on either `get_wp_h` or `VE` writes to `variation_patterns/`.
+For any EDS dataset not wrapped by the package, fetch directly:
 
-Format spec:
-- **8784 rows** (365 × 24 h, first day repeated once)
-- Leap years: Feb 29 dropped before averaging
-- Multi-year queries: hours averaged per calendar slot (month × day × hour). Prices weighted by `GrossConsumptionMWh`; VE series use simple mean
-- **Comma decimal separator**, two decimal places (e.g. `435,24`)
+```python
+import requests
+import pandas as pd
+
+def fetch_eds(dataset: str, params: dict) -> pd.DataFrame:
+    url = f"https://api.energidataservice.dk/dataset/{dataset}"
+    params.setdefault("limit", 0)       # 0 = no row limit
+    params.setdefault("timezone", "UTC")
+    r = requests.get(url, params=params)
+    r.raise_for_status()
+    return pd.DataFrame(r.json()["records"])
+
+# Example — transmission flows
+df = fetch_eds("InterconnectionAccountingPoint", {
+    "start":   "2024-01-01",
+    "end":     "2025-01-01",
+    "columns": "HourUTC,ConnectedArea,ExchangeDKK",
+    "sort":    "HourUTC asc",
+})
+```
+
+Dataset names are the path segment from the EDS URL, e.g. `ElspotPrices`, `ProductionConsumptionSettlement`, `CapacityPerMunicipality`. Browse at energidataservice.dk.
 
 ## Gotchas
 
