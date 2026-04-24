@@ -36,7 +36,7 @@ Storage defaults: Parquet for run output; CSV/Excel for stakeholder deliverables
 
 Cell structure, markdown conventions, LaTeX in notebooks → see `skills/notebook-style/`.
 
-Plotting: **matplotlib only**. Strict style standards → see `skills/econ-plotting/`.
+Plotting: **matplotlib only**. Strict style standards → see `skills/econ-plotting/`. Figure labels (axis titles, legends, annotations) in Danish by default; English for academic or English-language publication.
 
 ## Writing
 
