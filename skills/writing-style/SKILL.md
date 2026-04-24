@@ -64,18 +64,25 @@ Right: *"...investment workers extract scarcity rents and become a class of huma
 
 ## Register by output type
 
-| Output | Register |
-|--------|----------|
-| Academic thesis / working paper | Full formal prose, all conventions above |
-| Think-tank analysis (ETT) | Same structure, lighter notation, no LaTeX; plain `(i), (ii)` |
-| README / technical documentation | Short declarative sentences, imperative where appropriate; no citations |
-| Danish output | Same principles, Danish grammar. First person, present tense, professional. Do not translate English academic tics literally. |
+**Academic thesis / working paper (English, "jeg")**
+Full formal prose, all conventions above. Argument signalled upfront, executed in steps. LaTeX, `\citet{}`, inline Roman numerals.
+
+**Think-tank analysis / policy note (ETT, Danish, "vi")**
+ETT output uses "vi" as the house voice, not "jeg" — the institution publishes, not the individual. Shorter sentences, no LaTeX, plain `(i), (ii)`. Explicit methodology caveats in plain language ("Disse sammenhænge skal selvsagt tages med forbehold"). Conclusion is stated bluntly at the end as a policy implication, not a summary. Structure: frame the question → data → regression/model → implication.
+
+When introducing a technical term in Danish, explain it on first use: *"curtailment (dvs. at havvindproducenterne 'slukker' møllerne)"*.
+
+**README / technical documentation**
+Short declarative sentences. Imperative where appropriate. No citations. State what the code does, not the theory behind it.
+
+**Danish personal academic writing ("jeg")**
+Same principles as English thesis: first person singular, present tense, topic→development→implication. Do not translate English academic constructions literally into Danish. Avoid nominal style — prefer verbs.
 
 ## What not to do
 
-- Do not open with "In this paper, we..." or "This paper aims to..."
+- Do not open with "In this paper, we..." or "This paper aims to..." or Danish equivalents
 - Do not close a section with a summary paragraph restating what was just said
-- Do not hedge with "perhaps", "might", "it could be argued"
 - Do not use em-dash or colon as a substitute for a cleaner sentence construction
 - Do not use bullet lists in analytical prose (enumeration is inline)
 - Do not use passive voice to avoid taking a position
+- Do not hedge with "perhaps", "might", "det kan måske tænkes at" — state the claim, then qualify if needed
