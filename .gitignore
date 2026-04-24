@@ -1,0 +1,11 @@
+# Ignore everything by default
+*
+
+# Un-ignore the folder structure itself
+!.gitignore
+!README.md
+
+# Un-ignore your authored content
+!CLAUDE.md
+!skills/
+!skills/**
