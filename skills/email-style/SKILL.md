@@ -1,6 +1,6 @@
 ---
 name: email-style
-description: Linus's Danish email voice — salutation rules, sign-off, tone, structure, and what to avoid. Apply when drafting or editing any email in Danish.
+description: Linus's Danish email voice — salutation, sign-off, tone, structure, and what to avoid. Apply when drafting or editing any email in Danish.
 ---
 
 ## Sign-off
@@ -9,32 +9,37 @@ Always: `Bh. Linus` — no exceptions, no variations.
 
 ## Salutation
 
-- **Close colleagues / informal context:** ingen hilsen — start directly with content.
-- **Collaborators, seniors, external contacts:** `Kære [Navn],` followed by a blank line.
+Always `Kære [Navn],` followed by a blank line — for colleagues, collaborators, seniors, and external contacts alike.
 
-Never "Hej [Navn]," for professional email. Never "Til hvem det måtte angå" or other formal constructions.
+Never "Hej [Navn]," for professional email.
 
 ## Tone
 
-Conversational but professional. Natural Danish, not stiff. Short sentences. Uses common abbreviations in context (`ift.`, `ala`, `dsv`).
+Brief, friendly, and to the point. Conversational but professional. Natural Danish, not stiff. Short sentences. Common abbreviations in context (`ift.`, `pt.`, `ala`, `bl.a.`).
 
-Warmth is shown through substance, not pleasantries. No "Jeg håber du har det godt" or equivalent padding. Get to the point in the first sentence.
+Warmth is shown through substance, not pleasantries. Get to the point in the first sentence. No "Jeg håber du har det godt" or equivalent padding — **except** when contextually appropriate (e.g. seasonal: "Jeg håber, du har haft en god jul og nytår"). When used, a contextual opener is one line, then immediately into purpose.
 
-Positive acknowledgment when warranted — "Super, tak for input" or "Det er nogle super spændende punkter" — but only when genuine, never as a reflex opener.
+Honest about uncertainty: "synes ærligt talt, det er svært at vurdere" or "jeg er ikke komplet sikker på intuitionen, men jeg tror..." — don't perform confidence you don't have.
+
+Positive acknowledgment when warranted — "Super, tak for input", "Det er nogle super spændende punkter" — but only when genuine, never as a reflex opener.
 
 ## Structure
 
+**Preparing a meeting:**
+State why you're writing, give your position directly, flag open questions, close with the meeting reference.
+> *"Inden vores møde torsdag vil jeg gerne sende en kort opdatering [...]. Jeg regner ikke med at fortsætte [...]. Jeg hælder pt. mod [...]. Vi ses torsdag!"*
+
 **Sharing updated work:**
-State what changed, flag what to look at, set expectations for the next step.
+State what changed, flag what to look at, set expectations for next step.
 > *"Her opdateret version, som tilføjer [...]. Lad det være et groft grundlag [...]. Jeg starter fredag med at lave grundig sanity på det."*
 
 **Following up on a meeting:**
-Summary of what was concluded, whether it changes anything, what the open questions are.
+Summary of what was concluded, whether it changes anything, open questions.
 > *"Jeg mener ikke, at mødet motiverer nogen ændringer [...]. Jakob syntes [...]. Ift. systemomkostningerne snakkede vi ud fra [...]."*
 
 **Explaining a technical point:**
-Acknowledge uncertainty explicitly when it exists, then give the best reasoning. Don't perform confidence you don't have.
-> *"Jeg mindes ikke at vi fik et endeligt svar [...]. Altså er jeg ikke komplet sikker på intuitionen, men jeg tror, det er noget ala: [forklaring]."*
+Acknowledge uncertainty when it exists, then reason through it anyway.
+> *"Jeg er ikke komplet sikker på intuitionen, men jeg tror, det er noget ala: [forklaring]. Det er nok relevant at få [X]s input her."*
 
 **Suggesting a contact or idea:**
 Short, low-pressure. Enough context to be useful, no overselling.
@@ -43,8 +48,7 @@ Short, low-pressure. Enough context to be useful, no overselling.
 ## What not to do
 
 - No "Jeg skriver for at..." or "Formålet med denne mail er..."
-- No closing summary restating what was said
-- No excessive hedging — uncertain because X is fine, vague softening is not
-- No multiple exclamation marks
-- No bullet lists unless the content is genuinely list-like and the recipient needs to act on each item
-- No padding between the last point and the sign-off — end, then `Bh. Linus`
+- No closing summary restating what was just said
+- No excessive hedging — "usikker fordi X" is fine, vague softening is not
+- No bullet lists unless the content is genuinely list-like and the recipient acts on each item
+- No padding between the last point and the sign-off — end the content, then `Bh. Linus`
