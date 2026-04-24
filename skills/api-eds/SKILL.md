@@ -1,77 +1,94 @@
 ---
 name: api-eds
-description: Energi Data Service (energidataservice.dk) — ET-eds-api client, VE weather-normalised production, capacity index pattern. Use when fetching Danish electricity production, consumption, or capacity data.
+description: Energi Data Service (energidataservice.dk) — ET-eds-api client, spot prices (get_wp_h, wagg_wp), VE weather-normalised production. Use when fetching Danish electricity prices, production, consumption, or capacity data.
 ---
 
 ## Library
 
-`ET-eds-api` — self-built PyPI package. Two main endpoints:
-
-| Endpoint | Dataset |
-|----------|---------|
-| `ProductionConsumptionSettlement` | Hourly production/consumption by technology (MWh) |
-| `CapacityPerMunicipality` | Monthly installed capacity by technology and municipality |
-
-```python
-from et_eds_api import VE, columns   # or from ._cache import fetch for raw access
+```bash
+pip install ET-eds-api
 ```
 
-## Discover available columns
+```python
+from ET_eds_api import get_wp_h, wagg_wp, VE, columns
+```
+
+## Spot prices
+
+### get_wp_h — hourly consumption-weighted price
 
 ```python
-columns()   # prints value_columns (ProductionConsumptionSettlement) and cap_column options
+wp_h, q_h, p_area = get_wp_h(start=2023, end=2025)
+# wp_h   — hourly consumption-weighted price (pd.Series, index=HourUTC)
+# q_h    — hourly gross consumption (MWh)
+# p_area — DataFrame with columns: HourUTC | DK1 | DK2
+
+# With caching and EnergyPLAN output
+wp_h, q_h, p_area = get_wp_h(start=2023, end=2025, cache=True, save_txt=True)
+# save_txt writes to variation_patterns/wp_{start}_{end}.txt
 ```
+
+### wagg_wp — aggregated prices
+
+```python
+wp_d, wp_w, wp_m, wp_y = wagg_wp(start=2023, end=2025)
+# Returns daily, weekly, monthly, yearly aggregations
+```
+
+**Data sources for prices:**
+
+| Dataset | Period |
+|---------|--------|
+| `Elspotprices` | up to ~2025-09-30 |
+| `DayAheadPrices` | from ~2025-10-01 |
+
+The client stitches these automatically.
 
 ## VE — weather-normalised production
 
-`VE` fetches hourly production, aggregates to monthly, and deflates by a capacity index to isolate the weather signal from capacity growth.
+Fetches hourly production, aggregates to monthly, deflates by capacity index to isolate the weather signal from capacity growth.
 
 ```python
-df = VE(
-    value_columns = ['SolarPower_MWh', 'OnshoreWindPower_MWh'],  # summed into 'value'
-    cap_column    = ['SolarCapacity_MW'],    # capacity series to build deflator
-    col_name      = 'VE_sol',               # output column name
-    start         = '2015-01-01',
-    end           = '2024-01-01',
-    cap_ref       = None,   # None = last observed capacity; pass a float for counterfactual
-    verbose       = True,
-    cache         = False,
-    save_txt      = False,  # True = write EnergyPLAN-compatible .txt
+from ET_eds_api import VE, columns
+
+columns()   # prints available value_columns and cap_column options
+
+solar_ve = VE(
+    value_columns = ["SolarPowerLt10kW_MWh", "SolarPowerGe10Lt40kW_MWh", "SolarPowerGe40kW_MWh"],
+    cap_column    = ["SolarPowerCapacity"],
+    col_name      = "solar_VE",
+    start         = 2022,           # integer year
+    end           = 2025,
+    cap_ref       = None,           # None = last observed capacity
+    cache         = True,
+    save_txt      = False,
 )
-# Returns DataFrame: HourUTC, month, value, VE_sol_idx, VE_sol
+# Returns DataFrame: HourUTC, month, value, solar_VE_idx, solar_VE
 ```
 
-### cap_ref parameter
-
-The key analytical lever. Controls the denominator of the capacity index:
-
-- `None` — last observed capacity (default). Deflator normalises to "what would production be at current capacity?"
-- `float` — counterfactual capacity. Use to answer "what would production be at X GW?" — the reference scenario + diffs pattern.
-
-## Raw fetch
-
-For endpoints not covered by `VE`:
+### cap_ref — counterfactual capacity
 
 ```python
-from et_eds_api._cache import fetch
-
-df = fetch(
-    "https://api.energidataservice.dk/dataset/ElspotPrices",
-    {
-        "start":    "2020-01-01",
-        "end":      "2024-01-01",
-        "timezone": "UTC",
-        "columns":  "HourUTC,PriceArea,SpotPriceDKK",
-        "sort":     "HourUTC asc",
-        "limit":    0,      # 0 = no limit, returns all rows
-    }
-)
+# Normalise to fixed 1 GW — "what would production be at 1 GW installed?"
+solar_ve_1gw = VE(..., cap_ref=1_000)
 ```
+
+- `None` — denominator is last observed capacity
+- `float` (MW) — counterfactual fixed capacity; use for reference scenario + diffs
+
+## EnergyPLAN variation pattern files
+
+`save_txt=True` on either `get_wp_h` or `VE` writes to `variation_patterns/`.
+
+Format spec:
+- **8784 rows** (365 × 24 h, first day repeated once)
+- Leap years: Feb 29 dropped before averaging
+- Multi-year queries: hours averaged per calendar slot (month × day × hour). Prices weighted by `GrossConsumptionMWh`; VE series use simple mean
+- **Comma decimal separator**, two decimal places (e.g. `435,24`)
 
 ## Gotchas
 
-- `limit: 0` is required to get all rows — the default page limit is 100.
-- `timezone: "UTC"` always. Local time (CET/CEST) introduces DST gaps.
-- PriceArea is `DK1` or `DK2` — filter before aggregating if you want one area.
-- Capacity data is monthly; production data is hourly. The `VE` merge aligns on `month`.
-- `save_txt=True` writes an EnergyPLAN-compatible fixed-format text file — useful when piping into EnergyPLAN simulations.
+- `start` and `end` are **integer years**, not date strings.
+- `get_wp_h` returns **three** values since v0.1.5: `wp_h, q_h, p_area`. Old unpacking `wp_h, q_h = get_wp_h(...)` will break.
+- PriceArea is `DK1` or `DK2` — `p_area` has both as columns; `wp_h` is the consumption-weighted average across both.
+- Capacity data is monthly; production data is hourly. `VE` aligns on `month`.

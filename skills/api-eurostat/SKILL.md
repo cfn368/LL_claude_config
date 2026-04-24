@@ -78,8 +78,12 @@ Some NACE codes are aggregates that must be split before mapping to energy secto
 
 ## ComextApi — trade data (DS-045409)
 
+```bash
+pip install comext_wrapper
+```
+
 ```python
-from comext_wrapper import ComextApi    # self-built package
+from comext_wrapper import ComextApi
 
 api = ComextApi()
 api.info()                              # dataset overview + dimension list
