@@ -16,6 +16,7 @@ skills/
   api-dst/          — Danmarks Statistik (dstapi), BULK query pattern
   api-eds/          — Energi Data Service (ET-eds-api): prices + VE production
   api-eurostat/     — Eurostat SDMX + ComextApi for trade data
+  pyfile-style/     — py_files/ conventions: docstring, section separators, imports, cleanup checklist
 ```
 
 ## What's gitignored
