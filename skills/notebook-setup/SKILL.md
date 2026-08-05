@@ -62,26 +62,39 @@ def enable_autoreload(mode: int = 2) -> None:
     ip.run_line_magic("autoreload", str(int(mode)))
 
 
+TEXT_COLOR = "#3F6469"   # same hue as facecolor, much lower lightness
+
+
 def set_aej(**kwargs) -> None:
-    """AEJ-style matplotlib defaults. See skills/econ-plotting/ for full spec."""
+    """Colour-washed, spineless matplotlib style. See skills/econ-plotting/ for full spec."""
     import matplotlib as mpl
     mpl.rcParams.update({
-        "font.family": "serif",
-        "font.size": 15,
-        "axes.linewidth": 1.0,
-        "lines.linewidth": 1.2,
-        "axes.spines.top": True,
-        "axes.spines.right": True,
-        "xtick.direction": "out",
-        "ytick.direction": "out",
-        "legend.frameon": True,
-        "legend.fancybox": True,
+        "font.family":          "serif",
+        "font.style":           "italic",
+        "font.size":            15,
+        "figure.dpi":           150,
+        "figure.facecolor":     "#EAF1F2",
+        "axes.facecolor":       "#EAF1F2",
+        "axes.linewidth":       1.0,
+        "axes.spines.top":      False,
+        "axes.spines.right":    False,
+        "axes.spines.left":     False,
+        "axes.spines.bottom":   False,
+        "text.color":           TEXT_COLOR,
+        "axes.labelcolor":      TEXT_COLOR,
+        "xtick.color":          TEXT_COLOR,
+        "ytick.color":          TEXT_COLOR,
+        "lines.linewidth":      1.2,
+        "xtick.direction":      "out",
+        "ytick.direction":      "out",
+        "legend.frameon":       False,
+        "legend.fancybox":      False,
         "legend.borderaxespad": 0.4,
-        "legend.handlelength": 2.0,
+        "legend.handlelength":  2.0,
         "legend.handletextpad": 0.6,
-        "legend.labelspacing": 0.35,
-        "savefig.bbox": "tight",
-        "savefig.dpi": 300,
+        "legend.labelspacing":  0.35,
+        "savefig.bbox":         "tight",
+        "savefig.dpi":          300,
         **kwargs,
     })
 
@@ -93,7 +106,7 @@ def setup_notebook(*, autoreload: int = 2, aej: bool = True, **aej_kwargs) -> No
 
 
 __all__ = [
-    "enable_autoreload", "set_aej", "setup_notebook",
+    "enable_autoreload", "set_aej", "setup_notebook", "TEXT_COLOR",
     "np", "pd", "plt", "mpl", "mticker", "math",
     "StringIO", "dataclass", "reduce", "display", "requests",
     "Line2D", "Patch", "interp1d",
