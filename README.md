@@ -17,6 +17,9 @@ skills/
   api-eds/          — Energi Data Service (ET-eds-api): prices + VE production
   api-eurostat/     — Eurostat SDMX + ComextApi for trade data
   pyfile-style/     — py_files/ conventions: docstring, section separators, imports, cleanup checklist
+  excel-export/     — pasted Python output -> Danish Excel workbook: house palette, live deltas, charts
+    assets/
+      excel_style.py — openpyxl helpers: styling, number formats, bar chart
 ```
 
 ## What's gitignored
