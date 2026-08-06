@@ -14,6 +14,7 @@ from openpyxl.utils import get_column_letter
 NAVY = "1F2A44"        # primary text, header fill, primary series
 SUBHEADER = "41546E"   # lighter navy, sub-header fill (paired-group columns)
 ACCENT = "E04131"      # subtitles, delta values, secondary series
+LINK_GREEN = "008000"  # cross-sheet link (provenance marker, not an emphasis colour)
 ZEBRA = "EEF1F5"       # aggregate / total row background
 LABEL_GRAY = "7A8699"  # small section dividers ("Aggregater", "I alt")
 GRID_GRAY = "878787"   # chart gridlines
@@ -28,7 +29,12 @@ FMT_DELTA_INT = r"\+#,##0;\-#,##0;0"       # signed integer deltas
 FMT_PCT1 = "0.0%"                          # shares / rates
 FMT_DELTA_PCT1 = r"\+0.0%;\-0.0%;0.0%"     # signed percentage-point deltas
 FMT_2DP_PAREN = r"0.00;\(0.00\)"           # 2dp, negative = reduction, shown in parens
+FMT_DELTA_2DP = r"\+0.00;\-0.00;0.00"      # signed 2dp delta (e.g. TWh)
+FMT_1DP = "0.0"                            # small level, one decimal (e.g. hours)
+FMT_DELTA_1DP = r"\+0.0;\-0.0;0.0"         # signed one-decimal delta
 FMT_INT_PAREN = r"#,##0;\(#,##0\)"         # large value, negative = reduction, in parens
+FMT_MDKK_1DP = r"#,##0.0;\(#,##0.0\)"      # large value, 1dp, negative = reduction (e.g. mDKK)
+FMT_DELTA_MDKK_1DP = r"\+#,##0.0;\-#,##0.0;0.0"  # signed 1dp large-value delta (e.g. Δ mDKK)
 
 
 def setup_sheet(ws, zoom=130, margin_width=3.0):
